@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import dynamic from "next/dynamic";
-import { SignUpButton, SignedOut, SignedIn } from "@clerk/nextjs";
+import { useAuth } from "@/contexts/AuthContext";
 import CustomCursor from "@/components/CustomCursor";
 import AudioTape from "@/components/AudioTape";
 import gsap from "gsap";
@@ -14,6 +14,7 @@ const FarmScene = dynamic(() => import("@/components/FarmScene"), { ssr: false }
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { user, googleSignIn } = useAuth();
 
   useGSAP(() => {
     // Initial Entrance Animation
@@ -143,20 +144,17 @@ export default function Home() {
 
           {/* CTA */}
           <div className="cta-container mt-20 md:mt-12 flex flex-col items-center gap-6 z-30">
-            <SignedOut>
-              <SignUpButton mode="modal">
-                <UserCtaButton>
-                  Start Your Journey
-                </UserCtaButton>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
+            {!user ? (
+              <UserCtaButton onClick={googleSignIn}>
+                Start Your Journey
+              </UserCtaButton>
+            ) : (
               <Link href="/dashboard">
                 <UserCtaButton variant="primary">
                   Go to Dashboard
                 </UserCtaButton>
               </Link>
-            </SignedIn>
+            )}
             <p className="text-sm text-gray-500">No credit card required • Free for farmers</p>
           </div>
 
@@ -241,7 +239,7 @@ function FeatureCard({ title, desc, icon, align }: { title: string, desc: string
 }
 
 // Premium CTA Button with Hover Animation
-function UserCtaButton({ children, variant = 'default' }: { children: React.ReactNode, variant?: 'default' | 'primary' }) {
+function UserCtaButton({ children, variant = 'default', onClick }: { children: React.ReactNode, variant?: 'default' | 'primary', onClick?: () => void }) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const { contextSafe } = useGSAP({ scope: btnRef });
 
@@ -259,6 +257,7 @@ function UserCtaButton({ children, variant = 'default' }: { children: React.Reac
         ref={btnRef}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
+        onClick={onClick}
         className="px-8 py-4 bg-emerald-500 text-black text-lg font-bold rounded-full shadow-lg"
         data-cursor="pointer"
       >
@@ -272,6 +271,7 @@ function UserCtaButton({ children, variant = 'default' }: { children: React.Reac
       ref={btnRef}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      onClick={onClick}
       className="group relative px-8 py-4 bg-white text-black text-lg font-bold rounded-full overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.2)]"
       data-cursor="pointer"
     >
