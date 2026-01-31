@@ -5,18 +5,21 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import dynamic from "next/dynamic";
 import { SignUpButton, SignedOut, SignedIn } from "@clerk/nextjs";
+import CustomCursor from "@/components/CustomCursor";
+import AudioTape from "@/components/AudioTape";
 
 const FarmScene = dynamic(() => import("@/components/FarmScene"), { ssr: false });
 
 export default function Home() {
   return (
     <div className="min-h-screen font-sans flex flex-col bg-[#050605] text-white selection:bg-emerald-500 selection:text-white">
+      <CustomCursor />
       <Navbar />
 
       <main className="flex-1 flex flex-col items-center relative overflow-hidden pt-24 pb-12">
         {/* Background Gradients */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(125%_125%_at_30%_10%,rgba(255,255,255,0)_10%,rgba(121,116,134,1)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(125%_125%_at_50%_10%,rgba(0,0,0,0)_40%,rgba(13,110,87,1)_100%)]" />
         </div>
 
         <div className="w-full max-w-7xl mx-auto px-6 z-10 flex flex-col items-center">
@@ -111,6 +114,9 @@ export default function Home() {
             </SignedIn>
             <p className="text-sm text-gray-500">No credit card required • Free for farmers</p>
           </div>
+
+          {/* Audio Tape Section */}
+          <AudioTape />
         </div>
       </main>
 
