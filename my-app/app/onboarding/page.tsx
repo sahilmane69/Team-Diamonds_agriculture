@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import { db } from "@/lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
 import axios from "axios";
 
 export default function OnboardingPage() {
@@ -73,20 +71,19 @@ export default function OnboardingPage() {
           try {
                const profileData = {
                     ...formData,
-                    email: user.email,
-                    displayName: user.displayName,
-                    photoURL: user.photoURL,
                     onboardingCompleted: true,
-                    createdAt: new Date(), // Local storage will stringify this
                };
 
-               if (user.uid === "mock-user-123") {
-                    // Save to Local Storage for Mock User
-                    localStorage.setItem("mock_user_profile", JSON.stringify(profileData));
-                    console.log("Saved to local storage (Mock Mode)");
-               } else {
-                    // Save to Firebase
-                    await setDoc(doc(db, "users", user.uid), profileData);
+               // Save to MongoDB via API
+               const res = await fetch('/api/profile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(profileData)
+               });
+
+               if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.error || "Failed to save profile");
                }
 
                router.push("/dashboard");
@@ -101,7 +98,7 @@ export default function OnboardingPage() {
      return (
           <div className="min-h-screen bg-black text-white flex items-center justify-center p-6">
                <div className="max-w-xl w-full bg-white/5 backdrop-blur-xl border border-emerald-500/30 p-8 rounded-2xl shadow-2xl">
-                    <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-400 mb-2">
+                    <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-2">
                          Setup Your Farm Profile
                     </h1>
                     <p className="text-gray-400 mb-6 text-sm">
@@ -189,7 +186,7 @@ export default function OnboardingPage() {
                          <button
                               type="submit"
                               disabled={loading}
-                              className="w-full mt-6 bg-linear-to-r from-emerald-500 to-teal-500 text-black font-bold py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
+                              className="w-full mt-6 bg-gradient-to-r from-emerald-500 to-teal-500 text-black font-bold py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
                          >
                               {loading ? "Saving..." : "Create Profile & Go to Dashboard"}
                          </button>
