@@ -36,19 +36,19 @@ export default function FarmScene() {
      return (
           <div className="w-full h-full min-h-[400px] relative">
                <Canvas
-                    camera={{ position: [8, 5, 8], fov: 45 }}
+                    camera={{ position: [5, 4, 5], fov: 45 }}
                     gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
                     dpr={[1, 2]}
                     shadows
                >
                     <Suspense fallback={<LoaderComponent />}>
-                         <ambientLight intensity={1.5} />
-                         <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} intensity={2} castShadow />
-                         <pointLight position={[-10, -5, -10]} intensity={1} color="#4ade80" />
+                         <ambientLight intensity={2} />
+                         <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} intensity={3} castShadow />
+                         <pointLight position={[-10, -5, -10]} intensity={2} color="#4ade80" />
 
                          <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5} floatingRange={[0, 0.5]}>
                               <Center top>
-                                   <Model scale={[0.5, 0.5, 0.5]} />
+                                   <Model scale={[2.8, 2.8, 2.8]} />
                               </Center>
                          </Float>
 
