@@ -22,12 +22,9 @@ export default function Home() {
         <div className="w-full max-w-7xl mx-auto px-6 z-10 flex flex-col items-center">
           {/* Headline */}
           <div className="text-center space-y-6 max-w-4xl mx-auto mb-12">
-            <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-emerald-400 text-sm font-medium tracking-wide uppercase mb-2">
-              AI-Powered Agriculture
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-2xl leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-2xl leading-tight">
               Your Personal <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+              <span className="text-transparent bg-clip-text bg-[linear-gradient(to_bottom,#ffffff_0%,#a8a8a8_50%,#666666_100%)] drop-shadow-sm">
                 Intelligent Farm Assistant
               </span>
             </h1>
