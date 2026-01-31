@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Environment, OrbitControls, Float } from "@react-three/drei";
+import { useGLTF, Environment, OrbitControls, Float, Center, Html } from "@react-three/drei";
 import * as ONE from "three";
 
 function Model(props: any) {
@@ -11,7 +11,6 @@ function Model(props: any) {
 
      useFrame((state) => {
           if (modelRef.current) {
-               // Subtle floating movement
                modelRef.current.rotation.y += 0.002;
           }
      });
@@ -21,36 +20,48 @@ function Model(props: any) {
                object={scene}
                ref={modelRef}
                {...props}
-               scale={[0.1, 0.1, 0.1]} // Adjust scale as needed, usually GLB models are large
           />
+     );
+}
+
+function LoaderComponent() {
+     return (
+          <Html center>
+               <div className="text-emerald-500 font-bold text-lg animate-pulse">Loading Farm...</div>
+          </Html>
      );
 }
 
 export default function FarmScene() {
      return (
-          <div className="w-full h-full min-h-[400px]">
+          <div className="w-full h-full min-h-[400px] relative">
                <Canvas
-                    camera={{ position: [5, 2, 5], fov: 45 }}
-                    gl={{ antialias: true, alpha: true }}
+                    camera={{ position: [8, 5, 8], fov: 45 }}
+                    gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
                     dpr={[1, 2]}
+                    shadows
                >
-                    <ambientLight intensity={0.5} />
-                    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-                    <pointLight position={[-10, -10, -10]} intensity={0.5} />
+                    <Suspense fallback={<LoaderComponent />}>
+                         <ambientLight intensity={1.5} />
+                         <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} intensity={2} castShadow />
+                         <pointLight position={[-10, -5, -10]} intensity={1} color="#4ade80" />
 
-                    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                         <Model position={[0, -1, 0]} />
-                    </Float>
+                         <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5} floatingRange={[0, 0.5]}>
+                              <Center top>
+                                   <Model scale={[0.5, 0.5, 0.5]} />
+                              </Center>
+                         </Float>
 
-                    <Environment preset="city" />
-                    <OrbitControls
-                         enableZoom={false}
-                         enablePan={false}
-                         minPolarAngle={Math.PI / 4}
-                         maxPolarAngle={Math.PI / 2}
-                         autoRotate
-                         autoRotateSpeed={0.5}
-                    />
+                         <Environment preset="forest" />
+                         <OrbitControls
+                              enableZoom={false}
+                              enablePan={false}
+                              minPolarAngle={Math.PI / 3}
+                              maxPolarAngle={Math.PI / 2}
+                              autoRotate
+                              autoRotateSpeed={0.8}
+                         />
+                    </Suspense>
                </Canvas>
           </div>
      );
