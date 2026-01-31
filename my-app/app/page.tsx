@@ -4,9 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import { Canvas } from "@react-three/fiber";
-import { Environment, ContactShadows } from "@react-three/drei";
-import { FarmModel } from "@/components/3d/FarmModel";
 import { SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 export default function Home() {
@@ -54,24 +51,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Column: 3D Model */}
+          {/* Right Column: Placeholder for 3D Model (Removed) */}
           <div className="relative h-[50vh] lg:h-[80vh] w-full flex items-center justify-center">
-            <Canvas shadows camera={{ position: [0, 2, 6], fov: 35 }}>
-              <ambientLight intensity={0.7} />
-              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} castShadow />
-              <Environment preset="forest" />
-              {/* Scale is adjusted to fit the sidebar feel */}
-              <FarmModel scale={1.8} />
-              <ContactShadows position={[0, -1.4, 0]} opacity={0.5} scale={10} blur={2} far={4} color="#000000" />
-            </Canvas>
-
-            {/* Visual cue for interaction */}
-            <div className="absolute bottom-10 right-10 flex gap-2 items-center text-xs text-white/30 pointer-events-none">
-              <div className="w-6 h-6 border-2 border-white/30 rounded-none flex items-center justify-center">
-                <div className="w-2 h-2 bg-white/50 rounded-none animate-pulse" />
-              </div>
-              <span className="font-pixel text-sm">DRAG TO ROTATE</span>
-            </div>
+            {/* 3D Model removed as requested */}
           </div>
         </div>
 
