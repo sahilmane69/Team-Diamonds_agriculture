@@ -16,9 +16,7 @@ export default function Home() {
       <main className="flex-1 flex flex-col items-center relative overflow-hidden pt-24 pb-12">
         {/* Background Gradients */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-emerald-900/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[120px]" />
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(125%_125%_at_30%_10%,rgba(255,255,255,0)_10%,rgba(121,116,134,1)_100%)]" />
         </div>
 
         <div className="w-full max-w-7xl mx-auto px-6 z-10 flex flex-col items-center">
