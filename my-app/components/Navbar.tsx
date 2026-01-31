@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+
 export default function Navbar() {
      const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -50,10 +52,31 @@ export default function Navbar() {
                          <span className="font-pixel text-lg tracking-tight block">Farm Minerals</span>
                     </Link>
 
-                    {/* Contact (Right) */}
-                    <Link href="/contact" className="font-pixel text-lg hover:text-emerald-400 transition-colors">
-                         CONTACT US
-                    </Link>
+                    {/* Auth (Right) */}
+                    <div className="flex items-center gap-4">
+                         <SignedOut>
+                              <SignInButton mode="modal">
+                                   <button className="hidden md:block font-pixel text-lg hover:text-emerald-400 transition-colors">
+                                        SIGN IN
+                                   </button>
+                              </SignInButton>
+                              <SignUpButton mode="modal">
+                                   <button className="font-pixel text-lg bg-white text-black px-4 py-1 hover:bg-emerald-400 transition-colors shadow-[4px_4px_0_0_rgba(255,255,255,0.5)] active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
+                                        JOIN
+                                   </button>
+                              </SignUpButton>
+                         </SignedOut>
+
+                         <SignedIn>
+                              <UserButton
+                                   appearance={{
+                                        elements: {
+                                             avatarBox: "w-8 h-8 md:w-10 md:h-10 border-2 border-white"
+                                        }
+                                   }}
+                              />
+                         </SignedIn>
+                    </div>
                </nav>
 
                {/* Full Screen Overlay Menu */}

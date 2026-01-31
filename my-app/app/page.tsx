@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { Canvas } from "@react-three/fiber";
 import { Environment, ContactShadows } from "@react-three/drei";
 import { FarmModel } from "@/components/3d/FarmModel";
+import { SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 export default function Home() {
   return (
@@ -175,6 +176,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section className="w-full bg-emerald-900 text-white py-24 px-6 md:px-12 text-center">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Ready to transform your yield?</h2>
+          <p className="text-emerald-100 text-lg md:text-xl max-w-2xl mx-auto">
+            Join the farmers using our science-driven technology to improve soil health and profitability.
+          </p>
+          <SignedOut>
+            <SignUpButton mode="modal">
+              <button className="px-10 py-4 bg-white text-emerald-900 text-lg font-bold rounded-full hover:bg-emerald-50 transition-all shadow-xl hover:scale-105">
+                Get Started Today
+              </button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <button className="px-10 py-4 bg-white text-emerald-900 text-lg font-bold rounded-full hover:bg-emerald-50 transition-all shadow-xl hover:scale-105">
+              Contact Sales
+            </button>
+          </SignedIn>
+        </div>
+      </section>
       {/* Footer */}
       <footer className="w-full bg-[#1a1a1a] text-white py-16 px-6 md:px-12 border-t-4 border-[#2E3B23]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
@@ -205,6 +227,7 @@ export default function Home() {
           © {new Date().getFullYear()} Farm Minerals Inc. All Rights Reserved.
         </div>
       </footer>
-    </div>
+    </div >
+
   );
 }
