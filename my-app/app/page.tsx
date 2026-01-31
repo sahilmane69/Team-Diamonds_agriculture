@@ -168,22 +168,38 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full bg-black/80 backdrop-blur-xl border-t border-white/10 py-12 px-6 z-20 text-center md:text-left">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div>
-            <h2 className="text-2xl font-bold text-white mb-2">Krishi Mitra Ai</h2>
-            <p className="text-gray-500 text-sm max-w-xs mx-auto md:mx-0">Empowering farmers with cutting-edge artificial intelligence.</p>
-          </div>
+      <footer className="w-full relative overflow-hidden flex flex-col z-20 pt-10 pb-0">
 
-          <div className="flex gap-8 text-sm text-gray-400">
-            <Link href="#" className="hover:text-emerald-400 transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-emerald-400 transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-emerald-400 transition-colors">Contact</Link>
+        <div className="w-full max-w-7xl mx-auto px-6 relative z-30 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+          <div className="space-y-2">
+            {/* Links */}
+            <div className="flex flex-wrap gap-6 text-xs font-bold text-gray-400 uppercase tracking-widest">
+              <Link href="#" className="hover:text-emerald-400 transition-colors">Privacy Policy</Link>
+              <Link href="#" className="hover:text-emerald-400 transition-colors">Terms of Service</Link>
+              <Link href="#" className="hover:text-emerald-400 transition-colors">Contact</Link>
+            </div>
+            <p className="text-gray-500 text-[10px]">Empowering farmers with cutting-edge artificial intelligence.</p>
+            <div className="text-[10px] text-gray-600">
+              © {new Date().getFullYear()} Krishi Mitra. All rights reserved.
+            </div>
           </div>
+        </div>
 
-          <div className="text-xs text-gray-600">
-            © {new Date().getFullYear()} Krishi Mitra. All rights reserved.
-          </div>
+        {/* Giant Brand Text */}
+        <div className="w-full flex justify-center mt-auto relative z-10 pointer-events-none select-none -mb-8 md:-mb-12">
+          <h2 className="text-[13vw] font-black text-transparent bg-clip-text bg-linear-to-b from-white/20 to-white/0 leading-none tracking-tighter text-center">
+            Krishi Mitra Ai
+          </h2>
+        </div>
+
+        {/* Grass Image Overlay */}
+        <div className="w-full relative z-20 -mt-[6vw] md:-mt-[8vw] pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/grass_overlay.png"
+            alt="Grass Overlay"
+            className="w-full h-auto object-cover max-h-[30vh]"
+          />
         </div>
       </footer>
     </div>

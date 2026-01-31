@@ -18,9 +18,16 @@ export default function Navbar() {
                               className="object-cover"
                          />
                     </div>
-                    <span className="font-bold tracking-tight text-2xl font-sans bg-clip-text text-transparent bg-linear-to-r from-emerald-400 to-cyan-400 drop-shadow-sm">
-                         Krishi Mitra Ai
+                    <span
+                         className="font-bold tracking-tight text-2xl font-sans
+  bg-clip-text text-transparent
+  bg-linear-to-r from-emerald-500 via-teal-400 to-emerald-300
+  drop-shadow-[0_0_10px_rgba(16,185,129,0.35)]"
+                    >
+                         KrishiMitraAI
                     </span>
+
+
                </Link>
 
                {/* Auth (Right) */}

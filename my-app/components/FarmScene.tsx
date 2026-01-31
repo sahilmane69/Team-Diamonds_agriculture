@@ -2,7 +2,7 @@
 
 import React, { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Environment, OrbitControls, Float, Center, Html } from "@react-three/drei";
+import { useGLTF, Environment, OrbitControls, Float, Center } from "@react-three/drei";
 import * as ONE from "three";
 
 function Model(props: React.ComponentProps<'group'>) {
@@ -25,11 +25,7 @@ function Model(props: React.ComponentProps<'group'>) {
 }
 
 function LoaderComponent() {
-     return (
-          <Html center>
-               <div className="text-emerald-500 font-bold text-lg animate-pulse">Loading Farm...</div>
-          </Html>
-     );
+     return null;
 }
 
 export default function FarmScene() {
