@@ -1,4 +1,4 @@
-#  Krishimitra AI
+#  Krishi Mitra 
 
 <p align="center">
   <img src="/logo.png" alt="Krishimitra AI Logo" width="200"/>
