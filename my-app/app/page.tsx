@@ -4,7 +4,6 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import dynamic from "next/dynamic";
-import { useAuth } from "@/contexts/AuthContext";
 import CustomCursor from "@/components/CustomCursor";
 import AudioTape from "@/components/AudioTape";
 import gsap from "gsap";
@@ -14,7 +13,7 @@ const FarmScene = dynamic(() => import("@/components/FarmScene"), { ssr: false }
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { user, googleSignIn } = useAuth();
+
 
   useGSAP(() => {
     // Initial Entrance Animation
@@ -144,17 +143,11 @@ export default function Home() {
 
           {/* CTA */}
           <div className="cta-container mt-20 md:mt-12 flex flex-col items-center gap-6 z-30">
-            {!user ? (
-              <UserCtaButton onClick={googleSignIn}>
+            <Link href="/dashboard">
+              <UserCtaButton>
                 Start Your Journey
               </UserCtaButton>
-            ) : (
-              <Link href="/dashboard">
-                <UserCtaButton variant="primary">
-                  Go to Dashboard
-                </UserCtaButton>
-              </Link>
-            )}
+            </Link>
             <p className="text-sm text-gray-500">No credit card required • Free for farmers</p>
           </div>
 
