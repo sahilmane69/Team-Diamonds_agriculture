@@ -1,7 +1,7 @@
 #  Krishimitra AI
 
 <p align="center">
-  <img src="my-app/public/logo.png" alt="Krishimitra AI Logo" width="200"/>
+  <img src="my-app/logo.png" alt="Krishimitra AI Logo" width="200"/>
 </p>
 
 **Krishimitra AI** is an intelligent agriculture assistant that helps farmers take the best action for their crops using AI-driven insights.
